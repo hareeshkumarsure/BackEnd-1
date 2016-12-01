@@ -14,16 +14,16 @@ import org.springframework.stereotype.Component;
 @Table(name="cart")
 public class Cart {
 	@Id
-	private String id;
+	private long id;
 	@ManyToOne
 	private Product product;
 	private double price;
 	private double quantity;
-	public String getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setId(long l) {
+		this.id = l;
 	}
 	public Product getProduct() {
 		return product;
@@ -44,6 +44,18 @@ public class Cart {
 		this.quantity = quantity;
 	}
 	public void setProduct_id(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setProductName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setUserId(String loggedInUserId) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setStatus(String string) {
 		// TODO Auto-generated method stub
 		
 	}

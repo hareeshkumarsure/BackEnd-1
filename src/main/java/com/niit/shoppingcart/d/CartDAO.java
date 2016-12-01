@@ -11,4 +11,6 @@ public interface CartDAO {
 	public Cart get(String id);
 	public List<Cart>list();
 	public List<Cart> list(String id);
+	public Object getTotalAmount(String loggedInUserId);
+	public void delete(String id);
 }

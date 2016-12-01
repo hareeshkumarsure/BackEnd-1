@@ -82,4 +82,14 @@ public class SupplierDAOImpl implements SupplierDAO {
 		
 	}
 
+	public boolean addOrUpdate(Supplier supplier) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delete(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

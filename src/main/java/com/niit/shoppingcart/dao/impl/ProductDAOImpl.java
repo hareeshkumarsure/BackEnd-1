@@ -24,7 +24,7 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Transactional
-	public boolean save(Product product) {
+	public boolean add(Product product) {
 		
 		try
 		{
@@ -81,6 +81,16 @@ public class ProductDAOImpl implements ProductDAO {
 		String hql="select * from product";
 		Query q = sessionFactory.openSession().createSQLQuery(hql);
 		return q.list();
+	}
+
+	public boolean addOrUpdate(Product product) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean delete(String id) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

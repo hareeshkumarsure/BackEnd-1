@@ -77,4 +77,14 @@ public class CartDAOImpl implements CartDAO {
 		return null;
 	}
 
+	public Object getTotalAmount(String loggedInUserId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

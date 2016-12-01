@@ -31,7 +31,7 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 
 
 @Transactional
-	public boolean save(Category category) {
+	public boolean add(Category category) {
 		try
 		{
 			if(get(category.getId())!=null)
@@ -85,6 +85,16 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		return q.list();
 	}
+
+public boolean delete(String id) {
+	// TODO Auto-generated method stub
+	return false;
+}
+
+public boolean addOrUpdate(com.niit.shoppingcart.model.Category category) {
+	// TODO Auto-generated method stub
+	return false;
+}
 
 
 }
