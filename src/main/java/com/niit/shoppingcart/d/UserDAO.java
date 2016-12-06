@@ -11,6 +11,6 @@ public interface UserDAO {
 	public User get(String id);
 	public List<User>list();
 	public User isValidUser(String id, String password);
-	public void saveOrUpdate(User user);
+	public boolean saveOrUpdate(User user);
 
 }

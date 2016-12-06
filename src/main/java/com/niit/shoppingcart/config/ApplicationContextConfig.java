@@ -41,6 +41,8 @@ public DataSource getH2DataSource()
 	private Properties getHibernateProperties(){
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+		properties.setProperty("hibernate.show_sql", "true");
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
 		return properties;
 	}
 	@Autowired

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.d.CategoryDAO;
 import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.Supplier;
 
 @Repository("categoryDAO")
 
@@ -81,17 +82,31 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 	}
 @Transactional
 	public List<Category> list() {
-		String hql="select * from category";
+	/*String hql="select * from category";
 		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql);
-		return q.list();
+		return q.list();*/
+		List<Category> list=(List<Category>)sessionFactory.getCurrentSession().createCriteria(Category.class).list();
+		return list;
 	}
 
-public boolean delete(String id) {
-	// TODO Auto-generated method stub
-	return false;
+
+
+public boolean addOrUpdate(Category category) {
+	try
+	{
+	sessionFactory.openSession().saveOrUpdate(category);
+	return true;
+	}
+	catch(HibernateException e)
+	{
+		e.printStackTrace();
+		return false;
+	}
+	
 }
 
-public boolean addOrUpdate(com.niit.shoppingcart.model.Category category) {
+
+public boolean delete(String id) {
 	// TODO Auto-generated method stub
 	return false;
 }

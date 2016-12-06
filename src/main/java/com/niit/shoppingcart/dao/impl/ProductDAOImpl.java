@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.d.ProductDAO;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.Supplier;
 
 @Repository("productDAO")
 
@@ -81,11 +82,21 @@ public class ProductDAOImpl implements ProductDAO {
 		String hql="select * from product";
 		Query q = sessionFactory.openSession().createSQLQuery(hql);
 		return q.list();
+		//List<Product> list=(List<Product>)sessionFactory.getCurrentSession().createCriteria(Product.class).list();
+		//return list;
 	}
 
 	public boolean addOrUpdate(Product product) {
-		// TODO Auto-generated method stub
-		return false;
+		try
+		{
+		sessionFactory.openSession().saveOrUpdate(product);
+		return true;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public boolean delete(String id) {

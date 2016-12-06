@@ -1,10 +1,13 @@
-package com.niit.shoppingcart.dao.impl;
+  package com.niit.shoppingcart.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +21,8 @@ public class UserDAOImpl implements UserDAO {
 	private static final User User = null;
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	private User user;
 
 	public UserDAOImpl(SessionFactory sessionFactory)
 	{
@@ -72,29 +77,66 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 
+		
+		@Transactional
+		public List<User> list() {
+			@SuppressWarnings({ "unused", "unchecked" })
+			List<User> list = (List<User>) sessionFactory.getCurrentSession().createCriteria(User.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+			
+			return list();
+			
+		}
+		
+		/*@SuppressWarnings("unchecked")
+		@Transactional
+		public User getUserDetails(User u){
+			Session session=sessionFactory.getCurrentSession();
+			
+			Criteria cr=session.createCriteria(User.class);
+			cr.add(Restrictions.eq("mailId",u.getId()));
+			cr.add(Restrictions.eq("password",u.getPassword()));
+			user=(User)cr.uniqueResult();
+			
+			return u;
+		}*/
+		
+		
 		@Transactional
 		public User get(String id) {
 			
-		 sessionFactory.openSession().get(User.class, id);
-			return (User);
+			Session session=sessionFactory.getCurrentSession();
+			
+			Criteria ct=session.createCriteria(User.class);
+			ct.add(Restrictions.eq("id",id));
+			User u=(User)ct.uniqueResult();
+			return u;
 		}
 
-		@Transactional
-		public List<User> list() {
-			
-			String hql="select * from user";
-			Query q = sessionFactory.openSession().createSQLQuery(hql);
-			return q.list();
-			
-		}
-
+        @Transactional
 		public User isValidUser(String id, String password) {
-			// TODO Auto-generated method stub
-			return null;
+        	System.out.println("hi");
+            Session session=sessionFactory.getCurrentSession();
+			
+			Criteria cr=session.createCriteria(User.class);
+			cr.add(Restrictions.eq("email",id));
+			cr.add(Restrictions.eq("password",password));
+			user=(User)cr.uniqueResult();
+			System.out.println(user.getName());
+			return user;
 		}
-
-		public void saveOrUpdate(User user) {
-			// TODO Auto-generated method stub
+        
+        @Transactional
+		public boolean saveOrUpdate(User user) {
+			try
+			{
+			sessionFactory.openSession().saveOrUpdate(user);
+			return true;
+			}
+			catch(HibernateException e)
+			{
+				e.printStackTrace();
+				return false;
+			}
 			
 		}
 

@@ -1,7 +1,10 @@
 package com.niit.shoppingcart.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -12,13 +15,17 @@ import org.springframework.stereotype.Component;
 @Table(name="product")
 public class Product {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 	private String name;
+	private String description;
 	private double price;
-	private double stock;
+	private int stock;
 	@ManyToOne
+	@JoinColumn(name="Supplier",nullable = false)
 	private Supplier supplier;
 	@ManyToOne
+	@JoinColumn(name="Category",nullable = false)
 	private Category category;
 
 	public String getId() {
@@ -45,7 +52,7 @@ public class Product {
 		this.price = price;
 	}
 
-	public double getStock() {
+	public int getStock() {
 		return stock;
 	}
 
@@ -53,20 +60,28 @@ public class Product {
 		this.stock = stock;
 	}
 
-	public Supplier getSupplier_id() {
-		return getSupplier_id();
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
-	public void setSupplier_id(String string) {
+	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
 	}
 
-	public Category getCategory_id() {
-		return getCategory_id();
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategory_id(String string) {
+	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	

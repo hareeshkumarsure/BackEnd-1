@@ -10,13 +10,20 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.shoppingcart.d.SupplierDAO;
+import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Supplier;
 
 @Repository("supplierDAO")
 public class SupplierDAOImpl implements SupplierDAO {
 	
+	private static final Supplier Supplier = null;
+	
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	public SupplierDAOImpl() {
+		
+	}
 	
 	public SupplierDAOImpl(SessionFactory sessionFactory)
 	{
@@ -24,7 +31,7 @@ public class SupplierDAOImpl implements SupplierDAO {
 	}
 
 	@Transactional
-	public boolean save(Supplier supplier) {
+	public boolean add(Supplier supplier) {
 		try
 		{
 			sessionFactory.getCurrentSession().save(supplier);
@@ -70,26 +77,42 @@ public class SupplierDAOImpl implements SupplierDAO {
 	@Transactional
 	public Supplier get(String id) {
 		
-		return (Supplier) sessionFactory.openSession().get(Supplier.class, id);
+		sessionFactory.getCurrentSession().get(Supplier.class, id);
+		return(Supplier);
 	}
 	
 	@Transactional
 	public List<Supplier> list() {
 		
-		String hql="select * from supplier";
-		Query q = sessionFactory.openSession().createSQLQuery(hql);
-		return q.list();
+		/*String hql="select * from supplier";
+		Query q = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		return q.list();*/
+		List<Supplier> list=(List<Supplier>)sessionFactory.getCurrentSession().createCriteria(Supplier.class).list();
+		return list;
 		
 	}
 
 	public boolean addOrUpdate(Supplier supplier) {
-		// TODO Auto-generated method stub
-		return false;
+		try
+		{
+		sessionFactory.openSession().saveOrUpdate(supplier);
+		return true;
+		}
+		catch(HibernateException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public boolean delete(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	/*public List<com.niit.shoppingcart.model.Supplier> list() {
+		// TODO Auto-generated method stub
+		return null;
+	}*/
 
 }
