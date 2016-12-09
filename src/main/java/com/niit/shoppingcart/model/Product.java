@@ -22,10 +22,8 @@ public class Product {
 	private double price;
 	private int stock;
 	@ManyToOne
-	@JoinColumn(name="Supplier",nullable = false)
 	private Supplier supplier;
 	@ManyToOne
-	@JoinColumn(name="Category",nullable = false)
 	private Category category;
 
 	public String getId() {

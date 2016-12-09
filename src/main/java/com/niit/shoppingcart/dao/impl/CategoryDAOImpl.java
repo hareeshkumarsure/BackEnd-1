@@ -76,7 +76,7 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 		}
 	}
 @Transactional
-	public Category get(String id) {
+	public Category get(int id) {
 		sessionFactory.getCurrentSession().get(Category.class, id);
 		return(Category);
 	}
@@ -106,7 +106,7 @@ public boolean addOrUpdate(Category category) {
 }
 
 
-public boolean delete(String id) {
+public boolean delete(int id) {
 	// TODO Auto-generated method stub
 	return false;
 }

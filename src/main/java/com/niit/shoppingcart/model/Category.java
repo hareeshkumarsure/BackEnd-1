@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class Category {
 @Id
 @GeneratedValue(strategy=GenerationType.AUTO)
-private String id;
+private int id;
 private String name;
 private String description;
 
@@ -44,10 +44,10 @@ public void setProducts(Set<Product> products){
 	this.products=products;
 }
  
-public String getId() {
+public int getId() {
 	return id;
 }
-public void setId(String id) {
+public void setId(int id) {
 	this.id = id;
 }
 public String getName() {

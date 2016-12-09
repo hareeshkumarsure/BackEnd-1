@@ -79,11 +79,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Transactional
 	public List<Product> list() {
 		
-		String hql="select * from product";
+		/*String hql="select * from product";
 		Query q = sessionFactory.openSession().createSQLQuery(hql);
-		return q.list();
-		//List<Product> list=(List<Product>)sessionFactory.getCurrentSession().createCriteria(Product.class).list();
-		//return list;
+		return q.list();*/
+		List<Product> list=(List<Product>)sessionFactory.getCurrentSession().createCriteria(Product.class).list();
+		return list;
 	}
 
 	public boolean addOrUpdate(Product product) {
