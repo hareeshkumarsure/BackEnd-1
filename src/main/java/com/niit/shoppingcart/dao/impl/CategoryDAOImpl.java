@@ -2,9 +2,12 @@ package com.niit.shoppingcart.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +56,7 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 	public boolean update(Category category) {
 		try
 		{
-			sessionFactory.openSession().update(category);
+			sessionFactory.getCurrentSession().update(category);
 			return true;
 		}
 		catch(HibernateException e)
@@ -62,6 +65,7 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 			return false;
 		}
 	}
+/*
 @Transactional
 	public boolean delete(Category category) {
 		try
@@ -75,11 +79,14 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 			return false;
 		}
 	}
+	*/
 @Transactional
 	public Category get(int id) {
-		sessionFactory.getCurrentSession().get(Category.class, id);
-		return(Category);
+		Category cat=(Category)sessionFactory.getCurrentSession().get(Category.class, id);
+		return cat;
 	}
+
+
 @Transactional
 	public List<Category> list() {
 	/*String hql="select * from category";
@@ -90,13 +97,14 @@ public CategoryDAOImpl(SessionFactory sessionFactory)
 	}
 
 
-
+@Transactional
 public boolean addOrUpdate(Category category) {
 	try
 	{
 	sessionFactory.openSession().saveOrUpdate(category);
 	return true;
 	}
+	
 	catch(HibernateException e)
 	{
 		e.printStackTrace();
@@ -105,10 +113,23 @@ public boolean addOrUpdate(Category category) {
 	
 }
 
-
+@Transactional
 public boolean delete(int id) {
-	// TODO Auto-generated method stub
-	return false;
+	System.out.println("delete method");
+	try
+	{
+		Session session = sessionFactory.getCurrentSession();
+		Criteria cr =session.createCriteria(Category.class);
+		cr.add(Restrictions.eq("id",id));
+		Category category=(Category)cr.uniqueResult();
+		session.delete(category);
+		return true;
+	}
+	catch(HibernateException e)
+	{
+		e.printStackTrace();
+		return false;
+	}
 }
 
 
