@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.niit.shoppingcart.model.BillingAddress;
 import com.niit.shoppingcart.model.Cart;
 import com.niit.shoppingcart.model.Category;
+import com.niit.shoppingcart.model.OrderDetails;
 import com.niit.shoppingcart.model.Product;
 import com.niit.shoppingcart.model.ShippingAddress;
 import com.niit.shoppingcart.model.Supplier;
@@ -58,6 +59,7 @@ public DataSource getH2DataSource()
 		sessionBuilder.addAnnotatedClass(Cart.class);
 		sessionBuilder.addAnnotatedClass(BillingAddress.class);
 		sessionBuilder.addAnnotatedClass(ShippingAddress.class);
+		sessionBuilder.addAnnotatedClass(OrderDetails.class);
 		return sessionBuilder.buildSessionFactory();
 	}
 	@Autowired

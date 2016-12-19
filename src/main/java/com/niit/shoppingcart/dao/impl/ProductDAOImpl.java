@@ -1,5 +1,6 @@
 package com.niit.shoppingcart.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -94,7 +95,11 @@ public class ProductDAOImpl implements ProductDAO {
 	@Transactional
 	public List<Product> productByCategory(int id)
 	{
-		List<Product> productByCategory=(List<Product>)sessionFactory.getCurrentSession().createCriteria(Product.class).add(Restrictions.eq("Id", id));
+		List<Product> productByCategory=new ArrayList<Product>();
+		Session session=sessionFactory.getCurrentSession();
+		Criteria cr=session.createCriteria(Product.class);
+		cr.add(Restrictions.eq("id", id));
+		productByCategory=cr.list();
 		return productByCategory;
 				}
 

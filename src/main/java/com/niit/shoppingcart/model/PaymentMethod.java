@@ -14,7 +14,7 @@ public String getPaymentMethod() {
 }
 
 public void setPaymentMethod(String paymentMethod) {
-	PaymentMethod = paymentMethod;
+	this.PaymentMethod = paymentMethod;
 }
 
 }

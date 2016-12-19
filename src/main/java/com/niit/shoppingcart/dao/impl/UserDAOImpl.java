@@ -110,6 +110,12 @@ public class UserDAOImpl implements UserDAO {
 			User u=(User)ct.uniqueResult();
 			return u;
 		}
+		
+		public User getUser(){
+			return user;
+		} 
+		
+		
 
         @Transactional
 		public User isValidUser(String id, String password) {
