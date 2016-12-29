@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.niit.shoppingcart.d.CategoryDAO;
 import com.niit.shoppingcart.d.ProductDAO;
 import com.niit.shoppingcart.model.Category;
 import com.niit.shoppingcart.model.Product;
@@ -24,6 +25,9 @@ public class ProductDAOImpl implements ProductDAO {
 	private static final Object Id = null;
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	@Autowired
+	CategoryDAO categoryDAO;
 	
 	public ProductDAOImpl(SessionFactory sessionFactory)
 	{
@@ -98,7 +102,7 @@ public class ProductDAOImpl implements ProductDAO {
 		List<Product> productByCategory=new ArrayList<Product>();
 		Session session=sessionFactory.getCurrentSession();
 		Criteria cr=session.createCriteria(Product.class);
-		cr.add(Restrictions.eq("id", id));
+		cr.add(Restrictions.eq("category", categoryDAO.get(id)));
 		productByCategory=cr.list();
 		return productByCategory;
 				}

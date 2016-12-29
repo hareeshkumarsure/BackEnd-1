@@ -107,6 +107,7 @@ public class UserDAOImpl implements UserDAO {
 			
 			Criteria ct=session.createCriteria(User.class);
 			ct.add(Restrictions.eq("id",id));
+			System.out.println(id);
 			User u=(User)ct.uniqueResult();
 			return u;
 		}

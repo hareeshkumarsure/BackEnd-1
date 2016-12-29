@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.shoppingcart.d.CartDAO;
 import com.niit.shoppingcart.model.Cart;
 import com.niit.shoppingcart.model.Product;
+import com.niit.shoppingcart.model.User;
 
 @Repository("cartDAO")
 public class CartDAOImpl implements CartDAO {
@@ -75,12 +76,31 @@ public class CartDAOImpl implements CartDAO {
 		return list;
 	}
 
-	public List<Cart> get(int productId, int cartId) {
+
+	@Transactional
+	public boolean isInCart(String userId, String product) {
 		Session session=sessionFactory.getCurrentSession();
-		Criteria cr=session.createCriteria(Cart.class).add(Restrictions.eq("cartGroupId.productId.productId",productId));
-		cr.add(Restrictions.eq("cartGroupId.cartId.cartId",cartId));
+		Criteria cr=session.createCriteria(Cart.class).add(Restrictions.eq("productName",product));
+		cr.add(Restrictions.eq("userId.Id",userId));
+		System.out.println(userId);
+		System.out.println(product);
 		List<Cart> cartItems=cr.list();
-		return cartItems;
+		System.out.println(cartItems);
+		if(cartItems.isEmpty()){
+		return true;}
+		return false;
 	}
+
+	@Transactional
+	public Cart getCart(String userId) {
+		Session session=sessionFactory.getCurrentSession();
+		Criteria cr=session.createCriteria(Cart.class);
+		cr.add(Restrictions.eq("userId.Id",userId));
+		System.out.println("new carttttttttttt");
+		Cart cart = (Cart)cr.uniqueResult();
+		return cart;
+		
+	}
+
 
 }

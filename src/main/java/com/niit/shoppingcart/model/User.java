@@ -21,12 +21,7 @@ public class User {
     private int contact;
     private String email;
     private int role;
-	public String getId() {
-		return Id;
-	}
-	public void setId(String id) {
-		Id = id;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -41,6 +36,12 @@ public class User {
 	}
 	public int getContact() {
 		return contact;
+	}
+	public String getId() {
+		return Id;
+	}
+	public void setId(String id) {
+		Id = id;
 	}
 	public void setContact(int contact) {
 		this.contact = contact;
