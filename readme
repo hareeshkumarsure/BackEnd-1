@@ -1,0 +1,7 @@
+This is an E-Commerce website developed mainly using Spring MVC, Web flow. It enables customers to view and purchase variety of products belonging to their respective categories available on the site. 
+It consists of Customer, Product, Supplier and Admin modules
+
+Technologies used in the project are as follows:
+
+Backend Technologies: Spring Core, Hibernate, H2 database, JUnit
+Frontend Technologies : Spring MVC,Spring Web flow, JSP, BootStrap 
